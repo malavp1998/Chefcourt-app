@@ -11,7 +11,7 @@ export default function Login() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const { login, googleSignIn } = useUserAuth();
+  const { login, googleSignIn, githubSignIn } = useUserAuth();
 
   const loginWithGoogle = async () => {
     await googleSignIn()
@@ -21,22 +21,41 @@ export default function Login() {
       })
       .catch((err) => {
         console.log(err);
+        setError(err.message);
       });
   };
-  const signin = async (e) => {
-    e.preventDefault();
-    await login(email, password)
-      .then((data) => {
-        console.log("signin", data);
-        setError("logged-in Successfully");
-        setEmail("");
-        setPassword("");
+
+  const loginWithGithub = async () => {
+    await githubSignIn()
+      .then((result) => {
+        console.log(result);
         navigate("/home");
       })
       .catch((err) => {
-        console.log("signin", err);
+        console.log(err);
         setError(err.message);
       });
+  };
+
+  const signin = async (e) => {
+    e.preventDefault();
+    console.log(password + " dfd" + email);
+    if (email != "" && password != "") {
+      await login(email, password)
+        .then((data) => {
+          console.log("signin", data);
+          setError("logged-in Successfully");
+          setEmail("");
+          setPassword("");
+          navigate("/home");
+        })
+        .catch((err) => {
+          console.log("signin", err);
+          setError(err.message);
+        });
+    } else {
+      setError("Please fill all the details");
+    }
   };
 
   return (
@@ -132,6 +151,7 @@ export default function Login() {
                     className="btn btn-lg btn-block btn-primary mb-2"
                     style={{ backgroundColor: "#3b5998" }}
                     type="submit"
+                    onClick={loginWithGithub}
                   >
                     <i className="fab fa-github me-2"></i>Sign in with github
                   </button>
