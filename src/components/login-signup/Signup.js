@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useUserAuth } from "../context/LoginHelperFunctions";
+import { Alert } from "bootstrap";
 
 export default function Signup() {
   const [email, setEmail] = useState("");
@@ -7,6 +9,9 @@ export default function Signup() {
   const [password, setPassword] = useState("");
   const [selectedFile, setSelectedFile] = useState("");
   const [image, setImage] = useState("");
+  const [error, setError] = useState("");
+
+  const { signUp } = useUserAuth();
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -14,8 +19,23 @@ export default function Signup() {
     setSelectedFile(file);
   };
 
-  const signup = () => {
-    console.log("signup", email, name, password, image);
+  const signup = async (e) => {
+    // console.log("signup", email, name, password, image);
+    e.preventDefault();
+    await signUp(email, password)
+      .then((data) => {
+        console.log(data);
+        setError("Registered Successfully");
+        setEmail("");
+        setPassword("");
+        setImage("");
+        setName("");
+        selectedFile("");
+      })
+      .catch((err) => {
+        console.log("sigup", err);
+        setError(err.message);
+      });
   };
 
   return (
@@ -30,13 +50,23 @@ export default function Signup() {
               >
                 <div className="card-body p-5 text-center">
                   <h3 className="mb-5">Signup</h3>
+
+                  {error != "" && (
+                    <div className="alert alert-info" role="alert">
+                      {error}
+                    </div>
+                  )}
+
                   <div className="form-outline mb-4">
                     <input
                       type="text"
                       id="name"
                       className="form-control form-control-lg border"
                       value={name}
-                      onChange={(e) => setName(e.target.value)}
+                      onChange={(e) => {
+                        setName(e.target.value);
+                        setError("");
+                      }}
                     />
                     <label className="form-label" htmlFor="name">
                       Name
@@ -48,7 +78,10 @@ export default function Signup() {
                       id="email"
                       className="form-control form-control-lg border"
                       value={email}
-                      onChange={(e) => setEmail(e.target.value)}
+                      onChange={(e) => {
+                        setEmail(e.target.value);
+                        setError("");
+                      }}
                     />
                     <label className="form-label" htmlFor="email">
                       Email
@@ -68,7 +101,10 @@ export default function Signup() {
                       type="password"
                       id="password"
                       className="form-control form-control-lg border"
-                      onChange={(e) => setPassword(e.target.value)}
+                      onChange={(e) => {
+                        setPassword(e.target.value);
+                        setError("");
+                      }}
                       value={password}
                     />
                     <label className="form-label" htmlFor="password">
@@ -95,7 +131,7 @@ export default function Signup() {
                     type="submit"
                     onClick={signup}
                   >
-                    Login
+                    Signup
                   </button>
 
                   <hr className="my-4" />

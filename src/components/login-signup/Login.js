@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useUserAuth } from "../context/LoginHelperFunctions";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -7,9 +8,35 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [selectedFile, setSelectedFile] = useState("");
   const [image, setImage] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  const sign = () => {
-    console.log(name, password);
+  const { login, googleSignIn } = useUserAuth();
+
+  const loginWithGoogle = async () => {
+    await googleSignIn()
+      .then((result) => {
+        console.log(result);
+        navigate("/home");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const signin = async (e) => {
+    e.preventDefault();
+    await login(email, password)
+      .then((data) => {
+        console.log("signin", data);
+        setError("logged-in Successfully");
+        setEmail("");
+        setPassword("");
+        navigate("/home");
+      })
+      .catch((err) => {
+        console.log("signin", err);
+        setError(err.message);
+      });
   };
 
   return (
@@ -25,6 +52,12 @@ export default function Login() {
                 <div className="card-body p-5 text-center">
                   <h3 className="mb-5">Sign in</h3>
 
+                  {error != "" && (
+                    <div className="alert alert-info" role="alert">
+                      {error}
+                    </div>
+                  )}
+
                   <div className="form-outline mb-4">
                     <input
                       type="email"
@@ -33,6 +66,7 @@ export default function Login() {
                       value={email}
                       onChange={(e) => {
                         setEmail(e.target.value);
+                        setError("");
                       }}
                     />
                     <label className="form-label" for="typeEmailX-2">
@@ -48,6 +82,7 @@ export default function Login() {
                       value={password}
                       onChange={(e) => {
                         setPassword(e.target.value);
+                        setError("");
                       }}
                     />
                     <label className="form-label" for="typePasswordX-2">
@@ -71,6 +106,7 @@ export default function Login() {
                   <button
                     className="btn btn-primary btn-lg btn-block"
                     type="submit"
+                    onClick={signin}
                   >
                     Login
                   </button>
@@ -88,6 +124,7 @@ export default function Login() {
                     className="btn btn-lg btn-block btn-primary"
                     style={{ backgroundColor: "#dd4b39" }}
                     type="submit"
+                    onClick={loginWithGoogle}
                   >
                     <i className="fab fa-google me-2"></i> Sign in with google
                   </button>
