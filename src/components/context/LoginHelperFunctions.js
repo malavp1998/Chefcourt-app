@@ -24,7 +24,10 @@ export function UserAuthContextProvider({ children }) {
   function login(email, password) {
     return signInWithEmailAndPassword(auth, email, password);
   }
-  
+
+  function resetPassword(email) {
+    return sendPasswordResetEmail(auth, email);
+  }
 
   function googleSignIn() {
     const googleAuthProvider = new GoogleAuthProvider();
@@ -52,7 +55,15 @@ export function UserAuthContextProvider({ children }) {
     };
   }, []);
 
-  const values = { login, logout, signUp, googleSignIn, githubSignIn, user };
+  const values = {
+    login,
+    logout,
+    signUp,
+    googleSignIn,
+    githubSignIn,
+    resetPassword,
+    user,
+  };
 
   return (
     <userAuthContext.Provider value={values}>

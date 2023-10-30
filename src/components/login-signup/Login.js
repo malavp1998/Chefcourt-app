@@ -11,7 +11,7 @@ export default function Login() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const { login, googleSignIn, githubSignIn } = useUserAuth();
+  const { login, googleSignIn, githubSignIn, resetPassword } = useUserAuth();
 
   const loginWithGoogle = async () => {
     await googleSignIn()
@@ -35,6 +35,19 @@ export default function Login() {
         console.log(err);
         setError(err.message);
       });
+  };
+  const sendResetPasswordLink = async () => {
+    if (email != null) {
+      await resetPassword(email)
+        .then((result) => {
+          console.log(result);
+          navigate("/");
+        })
+        .catch((err) => {
+          console.log(err);
+          setError(err.message);
+        });
+    }
   };
 
   const signin = async (e) => {
@@ -109,16 +122,9 @@ export default function Login() {
                     </label>
                   </div>
 
-                  <div className="form-check d-flex justify-content-start mb-4">
-                    <input
-                      className="form-check-input border border-2"
-                      type="checkbox"
-                      value=""
-                      id="form1Example3"
-                    />
-                    <label className="form-check-label" for="form1Example3">
-                      {" "}
-                      Remember password{" "}
+                  <div className="form-outline mb-4 text-start">
+                    <label className="form-label" for="typePasswordX-2">
+                      <Link to={"/password_reset"}>Forgot password ?</Link>
                     </label>
                   </div>
 
