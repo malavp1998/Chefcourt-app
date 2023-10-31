@@ -2,6 +2,8 @@ import React from "react";
 import { useUserAuth } from "../context/LoginHelperFunctions";
 import { useNavigate } from "react-router-dom";
 import { getUserData } from "../context/DatabaseService";
+import Crousel from "./Crousel";
+import Header from "./Header";
 
 export default function Home() {
   const { logout, user } = useUserAuth();
@@ -28,9 +30,8 @@ export default function Home() {
   };
   return (
     <div>
-      <button onClick={logoutUser}>logout {user.email}</button>
-
-      <button onClick={getLoggedInUserData}>getData</button>
+      <Header />
+      <Crousel />
     </div>
   );
 }

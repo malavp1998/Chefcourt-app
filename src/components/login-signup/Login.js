@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserAuth } from "../context/LoginHelperFunctions";
+import Header from "../main/Header";
+import Footer from "../main/Footer";
+import { addNewUser } from "../context/DatabaseService";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -16,7 +19,13 @@ export default function Login() {
   const loginWithGoogle = async () => {
     await googleSignIn()
       .then((result) => {
-        console.log(result);
+        addNewUser(
+          result.user.uid,
+          result.user.email,
+          result.user.displayName,
+          result.user.photoURL,
+          new Date()
+        );
         navigate("/home");
       })
       .catch((err) => {
@@ -28,7 +37,14 @@ export default function Login() {
   const loginWithGithub = async () => {
     await githubSignIn()
       .then((result) => {
-        console.log(result);
+        console.log(" by github", result);
+        addNewUser(
+          result.user.uid,
+          result.user.email,
+          result.user.displayName,
+          result.user.photoURL,
+          new Date()
+        );
         navigate("/home");
       })
       .catch((err) => {
@@ -47,7 +63,7 @@ export default function Login() {
           setError("logged-in Successfully");
           setEmail("");
           setPassword("");
-          navigate("/");
+          navigate("/home");
         })
         .catch((err) => {
           console.log("signin", err);
@@ -59,8 +75,9 @@ export default function Login() {
   };
 
   return (
-    <div>
-      <section className="vh-100" style={{ backgroundColor: "508bfc" }}>
+    <div className="vh-90">
+      <Header />
+      <section className="h-100" style={{ backgroundColor: "508bfc" }}>
         <div className="container py-5 h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -158,6 +175,7 @@ export default function Login() {
           </div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 }

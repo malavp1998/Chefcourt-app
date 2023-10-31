@@ -8,16 +8,18 @@ import ProtectedRoute from "./main/ProtectedRoute";
 import ForgotPassword from "./login-signup/ForgotPassword";
 import DatabaseService from "./context/DatabaseService";
 import Header from "./main/Header";
+import ChefCard from "./main/ChefCard";
 
 export default function Index() {
   return (
     <BrowserRouter>
       <UserAuthContextProvider>
         <Routes>
-          <Route path="/login" element={<Login />} />
+          <Route path="/card" element={<ChefCard />} />
+          <Route path="/" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/password_reset" element={<ForgotPassword />} />
-          <Route path="/" element={<Header />} />
+          {/* <Route path="/" element={<Header />} /> */}
           <Route
             path="/home"
             element={

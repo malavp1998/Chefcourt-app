@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useUserAuth } from "../context/LoginHelperFunctions";
 import { getUserData } from "../context/DatabaseService";
 
@@ -22,6 +22,7 @@ export default function Header() {
   };
 
   useEffect(() => {
+    console.log("user", user);
     if (user != null) {
       getUserData(user.email)
         .then((res) => {
@@ -40,32 +41,30 @@ export default function Header() {
         <button
           className="navbar-toggler"
           type="button"
-          data-mdb-toggle="collapse"
-          data-mdb-target="#navbarSupportedContent"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent"
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <i className="fas fa-bars"></i>
+          <i class="fas fa-bars"></i>
         </button>
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <a className="navbar-brand mt-2 mt-lg-0" href="#">
-            <a className="nav-link" href="#">
-              Chefcourt
-            </a>
-          </a>
+          <Link className="navbar-brand mt-2 mt-lg-0" to="/">
+            Chefcourt
+          </Link>
 
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <a className="nav-link" href="#">
+              <Link className="nav-link" to="/home">
                 Home
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">
+              <Link className="nav-link" to="/blog">
                 Blog
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -75,7 +74,7 @@ export default function Header() {
             <button
               type="button"
               class="btn btn-primary px-3 me-2"
-              onClick={() => navigate("/login")}
+              onClick={() => navigate("/")}
             >
               Login
             </button>

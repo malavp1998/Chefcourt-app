@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useUserAuth } from "../context/LoginHelperFunctions";
 import { Link, useNavigate } from "react-router-dom";
+import Header from "../main/Header";
+import Footer from "../main/Footer";
 
 export default function ForgotPassword() {
   const { resetPassword } = useUserAuth();
@@ -28,10 +30,11 @@ export default function ForgotPassword() {
   };
 
   return (
-    <div>
-      <section className="vh-100" style={{ backgroundColor: "508bfc" }}>
-        <div className="container py-5 h-100">
-          <div className="row d-flex justify-content-center align-items-center h-100">
+    <div className="wrapper">
+      <Header />
+      <section className="vh-90" style={{ backgroundColor: "508bfc" }}>
+        <div className="container py-5 h-90">
+          <div className="row d-flex justify-content-center align-items-center h-90">
             <div className="col-12 col-md-8 col-lg-6 col-xl-5">
               <div
                 className="card shadow-2-strong"
@@ -72,7 +75,7 @@ export default function ForgotPassword() {
                   <hr className="my-4" />
                   <div className="text-center">
                     <p>
-                      Back to <Link to="/login">Login</Link>
+                      Back to <Link to="/">Login</Link>
                     </p>
                   </div>
                 </div>
@@ -81,6 +84,7 @@ export default function ForgotPassword() {
           </div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 }

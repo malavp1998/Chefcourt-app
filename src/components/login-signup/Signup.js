@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useUserAuth } from "../context/LoginHelperFunctions";
 import { addNewUser } from "../context/DatabaseService";
+import Header from "../main/Header";
+import Footer from "../main/Footer";
 
 export default function Signup() {
   const [email, setEmail] = useState("");
@@ -10,6 +12,7 @@ export default function Signup() {
   const [selectedFile, setSelectedFile] = useState("");
   const [image, setImage] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const { signUp } = useUserAuth();
 
@@ -25,12 +28,13 @@ export default function Signup() {
       .then((data) => {
         console.log(data);
         setError("Registered Successfully");
-        addNewUser(data.user.uid, email, name, image, password, new Date());
+        addNewUser(data.user.uid, email, name, image, new Date());
         setEmail("");
         setPassword("");
         setImage("");
         setName("");
         setSelectedFile("");
+        navigate("/home");
       })
       .catch((err) => {
         console.log("sigup", err);
@@ -40,9 +44,10 @@ export default function Signup() {
 
   return (
     <div>
-      <section className="vh-100" style={{ backgroundColor: "508bfc" }}>
-        <div className="container py-5 h-100">
-          <div className="row d-flex justify-content-center align-items-center h-100">
+      <Header />
+      <section className="vh-90" style={{ backgroundColor: "508bfc" }}>
+        <div className="container py-5 h-90">
+          <div className="row d-flex justify-content-center align-items-center h-90">
             <div className="col-12 col-md-8 col-lg-6 col-xl-5">
               <div
                 className="card shadow-2-strong"
@@ -162,7 +167,7 @@ export default function Signup() {
 
                   <div className="text-center">
                     <p>
-                      Already register? <Link to={"/login"}>Login</Link>
+                      Already register? <Link to={"/"}>Login</Link>
                     </p>
                   </div>
                 </div>
@@ -171,6 +176,7 @@ export default function Signup() {
           </div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 }
