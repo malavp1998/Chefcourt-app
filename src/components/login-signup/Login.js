@@ -16,7 +16,7 @@ export default function Login() {
   const loginWithGoogle = async () => {
     await googleSignIn()
       .then((result) => {
-        console.log(result)
+        console.log(result);
         navigate("/home");
       })
       .catch((err) => {
@@ -47,7 +47,7 @@ export default function Login() {
           setError("logged-in Successfully");
           setEmail("");
           setPassword("");
-          navigate("/home");
+          navigate("/");
         })
         .catch((err) => {
           console.log("signin", err);

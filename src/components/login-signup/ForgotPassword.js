@@ -72,7 +72,7 @@ export default function ForgotPassword() {
                   <hr className="my-4" />
                   <div className="text-center">
                     <p>
-                      Back to <Link to="/">Login</Link>
+                      Back to <Link to="/login">Login</Link>
                     </p>
                   </div>
                 </div>

@@ -1,6 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useUserAuth } from "../context/LoginHelperFunctions";
+import { getUserData } from "../context/DatabaseService";
 
 export default function Main() {
+  const { logout, user } = useUserAuth();
+  const [userInfo, setUserInfo] = useState(null);
+  const [showName, setShowName] = useState(false);
+  const [showTooltip, setShowTooltip] = useState(false);
+  const navigate = useNavigate();
+
+  const logoutUser = async () => {
+    await logout()
+      .then((result) => {
+        console.log(result);
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log("logoutUser", err);
+      });
+  };
+
+  useEffect(() => {
+    if (user != null) {
+      getUserData(user.email)
+        .then((res) => {
+          setUserInfo(res);
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [user]);
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
@@ -38,17 +71,44 @@ export default function Main() {
         </div>
 
         <div className="d-flex align-items-center">
-          <button type="button" class="btn btn-link px-3 me-2">
-            Login
-          </button>
+          {user == null && (
+            <button
+              type="button"
+              class="btn btn-primary px-3 me-2"
+              onClick={() => navigate("/login")}
+            >
+              Login
+            </button>
+          )}
 
-          <img
-            src="https://static.vecteezy.com/system/resources/previews/008/442/086/non_2x/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg"
-            className="rounded-circle"
-            height="25"
-            alt="Black and White Portrait of a Man"
-            loading="lazy"
-          />
+          {user != null && (
+            <>
+              {showName && <div>{userInfo.name}</div>}
+              <div className="m-2">
+                <img
+                  src={
+                    userInfo
+                      ? userInfo.image
+                      : "https://static.vecteezy.com/system/resources/previews/008/442/086/non_2x/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg"
+                  }
+                  className="rounded-circle"
+                  height="28"
+                  alt="Write correct image URL"
+                  loading="lazy"
+                  onMouseEnter={() => setShowName(true)}
+                  onMouseLeave={() => setShowName(false)}
+                />
+              </div>
+
+              <button
+                type="button"
+                class="px-3 me-2 btn btn-danger"
+                onClick={logoutUser}
+              >
+                Logout
+              </button>
+            </>
+          )}
 
           {/* <div className="dropdown">
             <a

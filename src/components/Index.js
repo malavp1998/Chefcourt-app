@@ -14,10 +14,10 @@ export default function Index() {
     <BrowserRouter>
       <UserAuthContextProvider>
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/password_reset" element={<ForgotPassword />} />
-          <Route path="/main" element={<Main />} />
+          <Route path="/" element={<Main />} />
           <Route
             path="/home"
             element={
