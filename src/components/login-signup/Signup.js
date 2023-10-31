@@ -61,7 +61,9 @@ export default function Signup() {
                     <input
                       type="text"
                       id="name"
-                      className="form-control form-control-lg border"
+                      className={`form-control form-control-lg border ${
+                        name ? "active" : ""
+                      } `}
                       value={name}
                       onChange={(e) => {
                         setName(e.target.value);
@@ -76,7 +78,9 @@ export default function Signup() {
                     <input
                       type="email"
                       id="email"
-                      className="form-control form-control-lg border"
+                      className={`form-control form-control-lg border ${
+                        email ? "active" : ""
+                      } `}
                       value={email}
                       onChange={(e) => {
                         setEmail(e.target.value);
@@ -100,7 +104,9 @@ export default function Signup() {
                     <input
                       type="password"
                       id="password"
-                      className="form-control form-control-lg border"
+                      className={`form-control form-control-lg border ${
+                        password ? "active" : ""
+                      } `}
                       onChange={(e) => {
                         setPassword(e.target.value);
                         setError("");

@@ -6,29 +6,29 @@ export default function ForgotPassword() {
   const { resetPassword } = useUserAuth();
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-
   const navigate = useNavigate();
 
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+    setMessage("");
+  };
+
   const sendResetPasswordLink = async () => {
-    if (email != "") {
-      await resetPassword(email)
-        .then((result) => {
-          console.log(result);
-          setEmail("");
-          setMessage("Password reset link send successfully");
-        })
-        .catch((err) => {
-          console.log(err);
-          setMessage(err.message);
-        });
-    } else {
-      setMessage("Your email address is required");
+    try {
+      if (email === "") {
+        throw new Error("Your email address is required");
+      }
+      await resetPassword(email);
+      setEmail("");
+      setMessage("Password reset link sent successfully");
+    } catch (error) {
+      console.error(error);
+      setMessage(error.message);
     }
   };
 
   return (
     <div>
-      {" "}
       <section className="vh-100" style={{ backgroundColor: "508bfc" }}>
         <div className="container py-5 h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">
@@ -40,7 +40,7 @@ export default function ForgotPassword() {
                 <div className="card-body p-5 text-center">
                   <h3 className="mb-5">Reset your password</h3>
 
-                  {message != "" && (
+                  {message && (
                     <div className="alert alert-info" role="alert">
                       {message}
                     </div>
@@ -50,21 +50,20 @@ export default function ForgotPassword() {
                     <input
                       type="email"
                       id="typeEmailX-2"
-                      className="form-control form-control-lg border"
+                      className={`form-control form-control-lg border ${
+                        email ? "active" : ""
+                      } `}
                       value={email}
-                      onChange={(e) => {
-                        setEmail(e.target.value);
-                        setMessage("");
-                      }}
+                      onChange={handleEmailChange}
                     />
-                    <label className="form-label" for="typeEmailX-2">
+                    <label className="form-label" htmlFor="typeEmailX-2">
                       Email
                     </label>
                   </div>
 
                   <button
                     className="btn btn-primary btn-lg btn-block"
-                    type="submit"
+                    type="button"
                     onClick={sendResetPasswordLink}
                   >
                     Send password reset email
@@ -73,7 +72,7 @@ export default function ForgotPassword() {
                   <hr className="my-4" />
                   <div className="text-center">
                     <p>
-                      Back to <Link to={"/"}>Login</Link>
+                      Back to <Link to="/">Login</Link>
                     </p>
                   </div>
                 </div>

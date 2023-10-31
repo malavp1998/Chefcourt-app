@@ -11,7 +11,7 @@ export default function Login() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const { login, googleSignIn, githubSignIn, resetPassword } = useUserAuth();
+  const { login, googleSignIn, githubSignIn } = useUserAuth();
 
   const loginWithGoogle = async () => {
     await googleSignIn()
@@ -35,19 +35,6 @@ export default function Login() {
         console.log(err);
         setError(err.message);
       });
-  };
-  const sendResetPasswordLink = async () => {
-    if (email != null) {
-      await resetPassword(email)
-        .then((result) => {
-          console.log(result);
-          navigate("/");
-        })
-        .catch((err) => {
-          console.log(err);
-          setError(err.message);
-        });
-    }
   };
 
   const signin = async (e) => {
@@ -94,7 +81,9 @@ export default function Login() {
                     <input
                       type="email"
                       id="typeEmailX-2"
-                      className="form-control form-control-lg border"
+                      className={`form-control form-control-lg border ${
+                        email ? "active" : ""
+                      } `}
                       value={email}
                       onChange={(e) => {
                         setEmail(e.target.value);
@@ -110,7 +99,9 @@ export default function Login() {
                     <input
                       type="password"
                       id="typePasswordX-2"
-                      className="form-control form-control-lg border"
+                      className={`form-control form-control-lg border ${
+                        password ? "active" : ""
+                      } `}
                       value={password}
                       onChange={(e) => {
                         setPassword(e.target.value);
