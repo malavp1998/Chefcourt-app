@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useUserAuth } from "../context/LoginHelperFunctions";
 import { getUserData } from "../context/DatabaseService";
 
-export default function Main() {
+export default function Header() {
   const { logout, user } = useUserAuth();
   const [userInfo, setUserInfo] = useState(null);
   const [showName, setShowName] = useState(false);

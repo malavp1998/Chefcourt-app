@@ -7,7 +7,7 @@ import { UserAuthContextProvider } from "./context/LoginHelperFunctions";
 import ProtectedRoute from "./main/ProtectedRoute";
 import ForgotPassword from "./login-signup/ForgotPassword";
 import DatabaseService from "./context/DatabaseService";
-import Main from "./main/Main";
+import Header from "./main/Header";
 
 export default function Index() {
   return (
@@ -17,7 +17,7 @@ export default function Index() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/password_reset" element={<ForgotPassword />} />
-          <Route path="/" element={<Main />} />
+          <Route path="/" element={<Header />} />
           <Route
             path="/home"
             element={
