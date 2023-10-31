@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useUserAuth } from "../context/LoginHelperFunctions";
-import { Alert } from "bootstrap";
+import { addNewUser } from "../context/DatabaseService";
 
 export default function Signup() {
   const [email, setEmail] = useState("");
@@ -20,17 +20,17 @@ export default function Signup() {
   };
 
   const signup = async (e) => {
-    // console.log("signup", email, name, password, image);
     e.preventDefault();
     await signUp(email, password)
       .then((data) => {
         console.log(data);
         setError("Registered Successfully");
+        addNewUser(data.user.uid, email, name, image, password, new Date());
         setEmail("");
         setPassword("");
         setImage("");
         setName("");
-        selectedFile("");
+        setSelectedFile("");
       })
       .catch((err) => {
         console.log("sigup", err);
@@ -92,13 +92,31 @@ export default function Signup() {
                     </label>
                   </div>
 
-                  <div className="form-outline mb-3 d-flex justify-content-between align-items-center border">
+                  <div className="form-outline mb-4">
+                    <input
+                      type="link"
+                      id="email"
+                      className={`form-control form-control-lg border ${
+                        image ? "active" : ""
+                      } `}
+                      value={image}
+                      onChange={(e) => {
+                        setImage(e.target.value);
+                        setError("");
+                      }}
+                    />
+                    <label className="form-label" htmlFor="email">
+                      Photo Link
+                    </label>
+                  </div>
+
+                  {/* <div className="form-outline mb-3 d-flex justify-content-between align-items-center border">
                     <label className="form-label m-2" htmlFor="file">
                       Photo {selectedFile && true}
                     </label>
 
                     <input type="file" onChange={handleFileChange} />
-                  </div>
+                  </div> */}
 
                   <div className="form-outline mb-4">
                     <input
