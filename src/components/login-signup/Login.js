@@ -26,7 +26,7 @@ export default function Login() {
           result.user.photoURL,
           new Date()
         );
-        navigate("/home");
+        navigate("/");
       })
       .catch((err) => {
         console.log(err);
@@ -45,7 +45,7 @@ export default function Login() {
           result.user.photoURL,
           new Date()
         );
-        navigate("/home");
+        navigate("/");
       })
       .catch((err) => {
         console.log(err);
@@ -63,7 +63,7 @@ export default function Login() {
           setError("logged-in Successfully");
           setEmail("");
           setPassword("");
-          navigate("/home");
+          navigate("/");
         })
         .catch((err) => {
           console.log("signin", err);

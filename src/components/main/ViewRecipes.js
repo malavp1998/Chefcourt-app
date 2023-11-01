@@ -332,7 +332,7 @@ export default function ViewRecipes() {
       ) : (
         <h1>Loading ...</h1>
       )}
-      <Footer  />
+      <Footer />
     </div>
   );
 }

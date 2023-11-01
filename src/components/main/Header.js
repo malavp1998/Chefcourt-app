@@ -14,6 +14,7 @@ export default function Header() {
     await logout()
       .then((result) => {
         console.log(result);
+        console.log("env varible", process.env.REACT_APP_API_KEY);
         navigate("/");
       })
       .catch((err) => {
@@ -57,12 +58,12 @@ export default function Header() {
 
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <Link className="nav-link" to="/home">
+              <Link className="nav-link" to="/">
                 Home
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/blog">
+              <Link className="nav-link" to="/">
                 Blog
               </Link>
             </li>
@@ -74,7 +75,7 @@ export default function Header() {
             <button
               type="button"
               class="btn btn-primary px-3 me-2"
-              onClick={() => navigate("/")}
+              onClick={() => navigate("/login")}
             >
               Login
             </button>

@@ -30,7 +30,9 @@ export default function ChefCard({ chefInfo }) {
         {/* <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6> */}
         <dl className="row">
           <dt className="col-sm-6">Name</dt>
-          <dd className="col-sm-6">{chefInfo.chefName}</dd>
+          <dd className="col-sm-6">
+            {chefInfo.chefName}
+          </dd>
 
           <dt className="col-sm-6">Year of Exp.</dt>
           <dd className="col-sm-6">{chefInfo.yearsOfExperience} year</dd>

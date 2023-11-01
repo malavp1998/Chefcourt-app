@@ -10,7 +10,7 @@ export default function Footer({ isSticy = true }) {
       <div className="text-center p-3" style={{ backgroundColor: "gray" }}>
         © 2020 Chefcourt:
         <a className="text-dark" href="https://mdbootstrap.com/">
-          MDBootstrap.com
+          Chefcourt
         </a>
       </div>
     </footer>

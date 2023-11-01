@@ -34,7 +34,7 @@ export default function Signup() {
         setImage("");
         setName("");
         setSelectedFile("");
-        navigate("/home");
+        navigate("/login");
       })
       .catch((err) => {
         console.log("sigup", err);
@@ -167,7 +167,7 @@ export default function Signup() {
 
                   <div className="text-center">
                     <p>
-                      Already register? <Link to={"/"}>Login</Link>
+                      Already register? <Link to={"/login"}>Login</Link>
                     </p>
                   </div>
                 </div>
