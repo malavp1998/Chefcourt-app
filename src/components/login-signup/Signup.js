@@ -25,7 +25,7 @@ export default function Signup() {
         setPassword("");
         setImage("");
         setName("");
-        navigate("/login");
+        navigate("/");
       })
       .catch((err) => {
         console.log("sigup", err);
