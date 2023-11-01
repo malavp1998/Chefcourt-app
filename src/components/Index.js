@@ -3,7 +3,7 @@ import Login from "./login-signup/Login";
 import Signup from "./login-signup/Signup";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./main/Home";
-import { UserAuthContextProvider } from "./context/LoginHelperFunctions";
+import { UserAuthContextProvider } from "./context/AuthContext";
 import ProtectedRoute from "./main/ProtectedRoute";
 import ForgotPassword from "./login-signup/ForgotPassword";
 import DatabaseService from "./context/DatabaseService";

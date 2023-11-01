@@ -1,16 +1,13 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useUserAuth } from "../context/LoginHelperFunctions";
+import { useUserAuth } from "../context/AuthContext";
 import Header from "../main/Header";
 import Footer from "../main/Footer";
 import { addNewUser } from "../context/DatabaseService";
 
 export default function Login() {
   const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
-  const [selectedFile, setSelectedFile] = useState("");
-  const [image, setImage] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useUserAuth } from "../context/LoginHelperFunctions";
+import { useUserAuth } from "../context/AuthContext";
 import { addNewUser } from "../context/DatabaseService";
 import Header from "../main/Header";
 import Footer from "../main/Footer";
@@ -9,18 +9,11 @@ export default function Signup() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
-  const [selectedFile, setSelectedFile] = useState("");
   const [image, setImage] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const { signUp } = useUserAuth();
-
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    setImage(file);
-    setSelectedFile(file);
-  };
 
   const signup = async (e) => {
     e.preventDefault();
@@ -33,7 +26,6 @@ export default function Signup() {
         setPassword("");
         setImage("");
         setName("");
-        setSelectedFile("");
         navigate("/login");
       })
       .catch((err) => {

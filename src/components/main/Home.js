@@ -1,5 +1,5 @@
 import React from "react";
-import { useUserAuth } from "../context/LoginHelperFunctions";
+import { useUserAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { getUserData } from "../context/DatabaseService";
 import Crousel from "./Crousel";
@@ -293,26 +293,6 @@ export default function Home() {
       ],
     },
   ];
-
-  // const logoutUser = async () => {
-  //   await logout()
-  //     .then((result) => {
-  //       console.log(result);
-  //       navigate("/");
-  //     })
-  //     .catch((err) => {
-  //       console.log("logoutUser", err);
-  //     });
-  // };
-
-  // const getLoggedInUserData = () => {
-  //   console.log("user data");
-  //   getUserData(user.email)
-  //     .then((res) => console.log(res))
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
   return (
     <div>
       <Header />

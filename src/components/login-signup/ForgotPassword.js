@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useUserAuth } from "../context/LoginHelperFunctions";
+import { useUserAuth } from "../context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import Header from "../main/Header";
 import Footer from "../main/Footer";

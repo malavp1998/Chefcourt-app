@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useUserAuth } from "../context/LoginHelperFunctions";
+import { useUserAuth } from "../context/AuthContext";
 import { getUserData } from "../context/DatabaseService";
 
 export default function Header() {

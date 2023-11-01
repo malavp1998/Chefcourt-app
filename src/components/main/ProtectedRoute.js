@@ -1,5 +1,5 @@
 import React from "react";
-import { useUserAuth } from "../context/LoginHelperFunctions";
+import { useUserAuth } from "../context/AuthContext";
 import Error from "./Error";
 import { Navigate } from "react-router-dom";
 
@@ -9,5 +9,5 @@ export default function ProtectedRoute({ children }) {
   if (user != null) {
     return children;
   }
-  return <Navigate to={"/login"} />;
+  return <Navigate to={"/"} />;
 }

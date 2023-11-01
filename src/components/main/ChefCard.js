@@ -26,8 +26,6 @@ export default function ChefCard({ chefInfo }) {
       />
 
       <div className="card-body">
-        {/* <h5 className="card-title">ChefName</h5> */}
-        {/* <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6> */}
         <dl className="row">
           <dt className="col-sm-6">Name</dt>
           <dd className="col-sm-6">
@@ -45,9 +43,7 @@ export default function ChefCard({ chefInfo }) {
         <button className="card-link" onClick={() => showRecipe(chefInfo.id)}>
           View Recipes
         </button>
-        {/* <a href="#" className="card-link">
-          Another link
-        </a> */}
+  
       </div>
     </div>
   );
