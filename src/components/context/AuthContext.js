@@ -40,13 +40,11 @@ export function UserAuthContextProvider({ children }) {
   }
 
   function logout() {
-    // console.log("log out user ");
     return signOut(auth);
   }
 
   useEffect(() => {
     const unsubsribe = onAuthStateChanged(auth, (currentUser) => {
-      // console.log("log in user ", currentUser);
       getAuth();
       setUser(currentUser);
     });

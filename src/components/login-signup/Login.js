@@ -34,7 +34,6 @@ export default function Login() {
   const loginWithGithub = async () => {
     await githubSignIn()
       .then((result) => {
-        console.log(" by github", result);
         addNewUser(
           result.user.uid,
           result.user.email,
@@ -52,11 +51,9 @@ export default function Login() {
 
   const signin = async (e) => {
     e.preventDefault();
-    console.log(password + " dfd" + email);
     if (email != "" && password != "") {
       await login(email, password)
         .then((data) => {
-          console.log("signin", data);
           setError("logged-in Successfully");
           setEmail("");
           setPassword("");

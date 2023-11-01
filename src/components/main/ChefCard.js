@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 export default function ChefCard({ chefInfo }) {
   const navigate = useNavigate();
   const showRecipe = (id) => {
-    console.log(id);
     navigate(`recipe/${id}`);
   };
 

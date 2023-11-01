@@ -274,7 +274,6 @@ export default function ViewRecipes() {
 
   useEffect(() => {
     const fetchedChef = getChefById(id);
-    console.log("id uede", fetchedChef);
     setChefInfo(fetchedChef);
   }, [id]);
   return (

@@ -13,8 +13,6 @@ export default function Header() {
   const logoutUser = async () => {
     await logout()
       .then((result) => {
-        console.log(result);
-        console.log("env varible", process.env.REACT_APP_API_KEY);
         navigate("/");
       })
       .catch((err) => {
@@ -23,12 +21,10 @@ export default function Header() {
   };
 
   useEffect(() => {
-    console.log("user", user);
     if (user != null) {
       getUserData(user.email)
         .then((res) => {
           setUserInfo(res);
-          console.log(res);
         })
         .catch((err) => {
           console.log(err);

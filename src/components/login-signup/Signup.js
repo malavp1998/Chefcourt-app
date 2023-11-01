@@ -19,7 +19,6 @@ export default function Signup() {
     e.preventDefault();
     await signUp(email, password)
       .then((data) => {
-        console.log(data);
         setError("Registered Successfully");
         addNewUser(data.user.uid, email, name, image, new Date());
         setEmail("");
