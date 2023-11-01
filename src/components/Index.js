@@ -9,6 +9,7 @@ import ForgotPassword from "./login-signup/ForgotPassword";
 import DatabaseService from "./context/DatabaseService";
 import Header from "./main/Header";
 import ChefCard from "./main/ChefCard";
+import ViewRecipes from "./main/ViewRecipes";
 
 export default function Index() {
   return (
@@ -19,7 +20,16 @@ export default function Index() {
           <Route path="/" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/password_reset" element={<ForgotPassword />} />
-          {/* <Route path="/" element={<Header />} /> */}
+          <Route path="/h" element={<Home />} />
+          <Route path="/v" element={<ViewRecipes />} />
+          <Route
+            path="/home/recipe/:id"
+            element={
+              <ProtectedRoute>
+                <ViewRecipes />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/home"
             element={

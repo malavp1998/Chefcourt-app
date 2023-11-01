@@ -23,22 +23,22 @@ export default function Crousel() {
         <div class="carousel-item active" style={{ height: "50vh" }}>
           <img class="d-block w-100" src={img1} alt="First slide" />
           <div class="carousel-caption d-none d-md-block">
-            <h5>Piyush</h5>
-            <p>Malav</p>
+            <h1 style={{ fontSize: "70px" }}>Your one stop for all Recipes </h1>
+            <h2>CHECKOUT NOW</h2>
           </div>
         </div>
         <div class="carousel-item" style={{ height: "50vh" }}>
           <img class="d-block w-100" src={img2} alt="Second slide" />
           <div class="carousel-caption d-none d-md-block">
-            <h5>Piyush</h5>
-            <p>Malav</p>
+            <h1 style={{ fontSize: "70px" }}>Your one stop for all Recipes </h1>
+            <h2>CHECKOUT NOW</h2>
           </div>
         </div>
         <div class="carousel-item" style={{ height: "50vh" }}>
           <img class="d-block w-100" src={img3} alt="Third slide" />
           <div class="carousel-caption d-none d-md-block">
-            <h5>Piyush</h5>
-            <p>Malav</p>
+            <h1 style={{ fontSize: "70px" }}>Your one stop for all Recipes </h1>
+            <h2>CHECKOUT NOW</h2>
           </div>
         </div>
       </div>
